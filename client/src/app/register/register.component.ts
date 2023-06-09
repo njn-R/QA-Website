@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 export class RegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private service: AuthService,
+    private router:Router
   ) {}
 
   formRegister = this.formBuilder.group({
@@ -20,12 +24,15 @@ export class RegisterComponent {
     ]),
     name: this.formBuilder.control('', [Validators.required]),
     password: this.formBuilder.control('', [Validators.required]),
-    role: this.formBuilder.control(''),
+    role: this.formBuilder.control('Candidate'),
   });
 
   onSubmit() {
     if (this.formRegister.valid) {
-      this.toastr.success('Registered Successfully');
+        this.service.registerUser(this.formRegister.value).subscribe(res => {
+        this.toastr.success('Registered Successfully');
+        this.router.navigate(['login']);
+      })
     } 
       
      else {

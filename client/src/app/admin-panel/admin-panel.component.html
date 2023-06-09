@@ -9,6 +9,48 @@
 
     <div
       class="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6"
-    >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores ullam id ratione placeat tenetur modi molestias autem eius aut provident.</div>
+    >
+      <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table class="min-w-full text-left text-sm font-light">
+                <thead class="border-b font-medium dark:border-neutral-500">
+                  <tr>
+                    <th scope="col" class="px-6 py-4">#</th>
+                    <th scope="col" class="px-6 py-4">Name</th>
+                    <th scope="col" class="px-6 py-4">Email</th>
+                    <th scope="col" class="px-6 py-4">Role</th>
+                    <th scope="col" class="px-6 py-4">Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let user of userList"
+                    class="border-b dark:border-neutral-500"
+                  >
+                    <td class="whitespace-nowrap px-6 py-4 font-medium">
+                      {{ user.id }}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 font-medium">
+                      {{ user.name }}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 font-medium">
+                      {{ user.email }}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 font-medium">
+                      {{ user.role }}
+                    </td>
+                    <td class="whitespace-nowrap px-6 py-4 font-medium">
+                      <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Edit</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
