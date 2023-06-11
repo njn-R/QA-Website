@@ -1,19 +1,6 @@
-<div
-  class="min-h-screen bg-gray-50 flex flex-col justify-center relative overflow-hidden sm:py-12"
->
-  <div class="max-w-7xl mx-auto">
-    <!-- New Div -->
-    <div
-      class="absolute -inset-1 bg-gradient-to-r from-green-600 to-skyblue-600 rounded-lg blur opacity-25"
-    ></div>
-
-    <div
-      class="relative px-7 py-6 ring-1 ring-gray-900/5 rounded-xl leading-none flex items-top justify-start space-x-6"
-    >
-      <div class="flex justify-center justify-items-center">
+<div class="flex bg-white w-[400px] h-[400px] justify-center justify-items-center p-16 mt-16 mx-auto rounded-xl">
         <div class="w-full max-w-sm">
           <form
-            class="bg-white shadow-md rounded-xl p-20 mb-10"
             [formGroup]="formLogin"
             (ngSubmit)="onSubmit()"
           >
@@ -67,6 +54,3 @@
           </form>
         </div>
       </div>
-    </div>
-  </div>
-</div>

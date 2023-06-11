@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { QuestionAuthoringComponent } from './question-authoring/question-authoring.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -24,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomeComponent,
     AdminPanelComponent,
     NavBarComponent,
+    QuestionAuthoringComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
