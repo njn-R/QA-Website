@@ -1,0 +1,25 @@
+{
+  "user": [
+    {
+      "email": "test@example.com",
+      "name": "John Smith",
+      "password": "password",
+      "role": "Candidate",
+      "id": 1
+    },
+    {
+      "email": "neeraj@gmail.com",
+      "name": "Neeraj",
+      "password": "12345678",
+      "role": "Candidate",
+      "id": 2
+    },
+    {
+      "email": "temp@yahoo.com",
+      "name": "Temp",
+      "password": "temp",
+      "role": "Candidate",
+      "id": 3
+    }
+  ]
+}

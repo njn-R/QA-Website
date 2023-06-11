@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: linear-gradient(to right, #59f2ba, #84b5f0);
+  border-radius: 0.5rem;
+  background-color: rgba(52, 211, 153, 0.25);
+}
