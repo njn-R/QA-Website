@@ -15,6 +15,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuestionAuthoringComponent } from './question-authoring/question-authoring.component';
 import { FormsModule } from '@angular/forms';
+import { CoursesComponent } from './courses/courses.component';
 
 
 
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     AdminPanelComponent,
     NavBarComponent,
     QuestionAuthoringComponent,
+    CoursesComponent,
   ],
   imports: [
     BrowserModule,

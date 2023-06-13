@@ -1,0 +1,58 @@
+{
+  "courses": [
+    {
+      "courseID": 1,
+      "title": "The Web Developer Bootcamp",
+      "price": "599",
+      "rating": 4.2,
+      "description": "A comprehensive course covering HTML, CSS, JavaScript, Node.js, and more.",
+      "level": "Beginner to Intermediate",
+      "image": "assets/images/webDev-Bootcamp.png"
+    }, 
+    {
+      "courseID": 2,
+      "title": "JavaScript: Understanding all the Parts",
+      "price": "299",
+      "rating": 4.5,
+      "description": "An in-depth course focusing on the core concepts and tricky aspects of JavaScript.",
+      "level": "Intermediate",
+      "image": "assets/images/javascript.png"
+    },
+    {
+      "courseID": 3,
+      "title": "The Complete Web Developer Course 2.0",
+      "price": "349",
+      "rating": 4.0,
+      "description": "A comprehensive course covering HTML, CSS, JavaScript, jQuery, and more.",
+      "level": "Beginner to Intermediate",
+      "image": "assets/images/webDev.jpg"
+    },
+    {
+      "courseID": 4,
+      "title": "Responsive Web Design",
+      "price": "599",
+      "rating": 4.8,
+      "description": "A free course covering the fundamentals of responsive web design using HTML and CSS.",
+      "level": "Beginner",
+      "image": "assets/images/responsiveWeb.png"
+    },
+    {
+      "courseID": 5,
+      "title": "Advanced CSS and Sass",
+      "price": "299",
+      "rating": 3.9,
+      "description": "An advanced course on CSS and Sass with real-world projects and challenges.",
+      "level": "Intermediate to Advanced",
+      "image": "assets/images/cssSass.jpg"
+    },
+    {
+      "courseID": 6,
+      "title": "Full Stack Web Development with React",
+      "price": "449",
+      "rating": 4.5,
+      "description": "A specialization that covers front-end and back-end development with React and Node.js.",
+      "level": "Intermediate",
+      "image": "assets/images/react.jpg"
+    }
+  ]
+}
