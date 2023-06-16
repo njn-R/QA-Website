@@ -8,11 +8,11 @@
       "role": "Candidate"
     },
     {
+      "id": 2,
       "email": "neeraj@gmail.com",
       "name": "Neeraj",
       "password": "12345678",
-      "role": "Candidate",
-      "id": 2
+      "role": "Candidate"
     },
     {
       "email": "temp@yahoo.com",
@@ -20,6 +20,13 @@
       "password": "temp",
       "role": "Candidate",
       "id": 3
+    },
+    {
+      "email": "admin@gmail.com",
+      "name": "admin",
+      "password": "password",
+      "role": "Admin",
+      "id": 4
     }
   ]
 }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-question-authoring',
@@ -7,19 +9,29 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./question-authoring.component.css'],
 })
 export class QuestionAuthoringComponent {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private service: AuthService, private toastr: ToastrService) {}
 
   showModal = false;
-  questionForm: FormGroup = new FormGroup({});
-  selectedAnswerType = 'textbox';
+  selectedAnswerType = '';
+  categories = ['React', 'Angular', 'NodeJS', 'Javascript'];
+  answerTypeArray = ['Text', 'MCQ', 'True/False', 'Checkbox'];
 
-  ngOnInit() {
-    this.questionForm = this.formBuilder.group({
-      answer: [''], // Set up form control for 'answer'
-    });
-  }
+  questionForm = this.formBuilder.group({
+    id: this.formBuilder.control('', [Validators.required]),
+    category: this.formBuilder.control('', [Validators.required]),
+    question: this.formBuilder.control('', [Validators.required]),
+    answerType: this.formBuilder.control('', [Validators.required]),
+    answer: this.formBuilder.control('', [Validators.required]),
+  });
 
   toggleModal() {
     this.showModal = !this.showModal;
+  }
+
+  onSubmit() {
+    this.service.postQuestion(this.questionForm.value).subscribe((res) => {
+      this.toastr.success('Question added successfully');
+    });
+    this.toggleModal();
   }
 }

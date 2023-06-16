@@ -6,32 +6,44 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  apiUrl = 'http://localhost:3001/user';
+  userUrl = 'http://localhost:3001/user';
   courseUrl = 'http://localhost:3000/courses';
+  questionUrl = 'http://localhost:3002/questions';
 
   constructor(private http: HttpClient) {}
 
+  // User API
   getUserbyEmail(getData: any) {
-    return this.http.get(this.apiUrl + '/?email=' + getData);
+    return this.http.get(this.userUrl + '/?email=' + getData);
   }
 
   getUserbyID(id: any) {
-    return this.http.get(this.apiUrl + '/' + id);
+    return this.http.get(this.userUrl + '/' + id);
   }
 
   registerUser(postData: any) {
-    return this.http.post(this.apiUrl, postData);
+    return this.http.post(this.userUrl, postData);
   }
 
   getAllUsers() {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.userUrl);
   }
 
+  updateUser(id: any, postData: any) {
+    return this.http.put(this.userUrl + '/' + id, postData);
+  }
+
+  // Course API
   getAllCourses() {
     return this.http.get(this.courseUrl);
   }
 
-  updateUser(id:any, postData: any) {
-    return this.http.put(this.apiUrl + '/' + id, postData);
+  // Question API
+  postQuestion(postData: any) {
+    return this.http.post(this.questionUrl, postData);
+  }
+
+  getAllQuestions() {
+    return this.http.get(this.questionUrl);
   }
 }

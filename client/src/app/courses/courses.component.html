@@ -1,5 +1,5 @@
-<!-- Hero Section -->
-<section id="courses">
+
+<section id="courses" class="mb-16 min-h-screen">
   <!-- Flex Container -->
   <div
     class="container flex flex-col-reverse md:flex-row items-center px-16 mx-auto mt-10 space-y-0 md:space-y-0"
@@ -19,7 +19,7 @@
   <div class="flex flex-col md:flex-row flex-wrap ml-16">
     <div *ngFor="let course of courseData">
       <div
-        class="w-[350px] h-[380px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ml-8 mb-16"
+        class="w-[350px] h-[380px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ml-8 mb-16 overflow-hidden transform transition-transform duration-300 hover:scale-105"
       >
         <a href="#">
           <img

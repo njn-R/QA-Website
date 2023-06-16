@@ -1,56 +1,58 @@
-<div class="flex bg-white w-[400px] h-[400px] justify-center justify-items-center p-16 mt-16 mx-auto rounded-xl">
-        <div class="w-full max-w-sm">
-          <form
-            [formGroup]="formLogin"
-            (ngSubmit)="onSubmit()"
-          >
-            <div class="mb-4">
-              <label
-                class="block text-gray-700 text-sm font-bold mb-2"
-                for="email"
-              >
-                Email
-              </label>
-              <input
-                formControlName="email"
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-emerald-500"
-                id="email"
-                type="text"
-                placeholder="Email Address"
-              />
-            </div>
-            <div class="mb-6">
-              <label
-                class="block text-gray-700 text-sm font-bold mb-2"
-                for="password"
-              >
-                Password
-              </label>
-              <input
-                formControlName="password"
-                class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-emerald-500"
-                id="password"
-                type="password"
-                placeholder="************"
-              />
-              <p [hidden]="true" class="text-red-500 text-xs italic">
-                Please choose a password.
-              </p>
-            </div>
-            <div class="flex items-center justify-between">
-              <button
-                class="bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8"
-                type="submit"
-              >
-                Sign In
-              </button>
-              <a
-                class="inline-block align-baseline font-bold text-sm text-emerald-500 hover:text-emerald-800 mt-8"
-                href="#"
-              >
-                Forgot Password?
-              </a>
-            </div>
-          </form>
+<div class="min-h-screen">
+  <div class="flex bg-white w-[400px] h-[400px] justify-center justify-items-center p-16 mt-36 mx-auto rounded-xl mb-16">
+          <div class="w-full max-w-sm">
+            <form
+              [formGroup]="formLogin"
+              (ngSubmit)="onSubmit()"
+            >
+              <div class="mb-4">
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="email"
+                >
+                  Email
+                </label>
+                <input
+                  formControlName="email"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-emerald-500"
+                  id="email"
+                  type="text"
+                  placeholder="Email Address"
+                />
+              </div>
+              <div class="mb-6">
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="password"
+                >
+                  Password
+                </label>
+                <input
+                  formControlName="password"
+                  class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-emerald-500"
+                  id="password"
+                  type="password"
+                  placeholder="************"
+                />
+                <p [hidden]="true" class="text-red-500 text-xs italic">
+                  Please choose a password.
+                </p>
+              </div>
+              <div class="flex items-center justify-between">
+                <button
+                  class="bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8"
+                  type="submit"
+                >
+                  Sign In
+                </button>
+                <a
+                  class="inline-block align-baseline font-bold text-sm text-emerald-500 hover:text-emerald-800 mt-8"
+                  routerLink="/reset-password"
+                >
+                  Forgot Password?
+                </a>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+</div>

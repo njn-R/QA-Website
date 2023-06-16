@@ -1,0 +1,18 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "",
+      "question": "",
+      "answerType": "True/False",
+      "answer": "true"
+    },
+    {
+      "id": 2,
+      "category": "",
+      "question": "",
+      "answerType": "True/False",
+      "answer": "false"
+    }
+  ]
+}
