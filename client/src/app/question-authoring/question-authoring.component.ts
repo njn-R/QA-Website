@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-question-authoring',
@@ -9,20 +10,44 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./question-authoring.component.css'],
 })
 export class QuestionAuthoringComponent {
-  constructor(private formBuilder: FormBuilder, private service: AuthService, private toastr: ToastrService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: AuthService,
+    private toastr: ToastrService
+  ) {}
 
   showModal = false;
   selectedAnswerType = '';
   categories = ['React', 'Angular', 'NodeJS', 'Javascript'];
   answerTypeArray = ['Text', 'MCQ', 'True/False', 'Checkbox'];
+  allQuestions: any;
+  answerText: any;
 
   questionForm = this.formBuilder.group({
     id: this.formBuilder.control('', [Validators.required]),
     category: this.formBuilder.control('', [Validators.required]),
     question: this.formBuilder.control('', [Validators.required]),
     answerType: this.formBuilder.control('', [Validators.required]),
-    answer: this.formBuilder.control('', [Validators.required]),
+    answer: this.formBuilder.control(''),
+    multipleAnswers: this.formBuilder.array([
+      this.formBuilder.group({
+        radio: [false],
+        text: [''],
+      }),
+    ]),
   });
+
+  get answersArray(): FormArray {
+    return this.questionForm.get('multipleAnswers') as FormArray;
+  }
+  addAnswer() {
+    this.answersArray.push(
+      this.formBuilder.group({
+        radio: [false],
+        text: [''],
+      })
+    );
+  }
 
   toggleModal() {
     this.showModal = !this.showModal;
@@ -33,5 +58,15 @@ export class QuestionAuthoringComponent {
       this.toastr.success('Question added successfully');
     });
     this.toggleModal();
+  }
+
+  getQuestions() {
+    this.service.getAllQuestions().subscribe((res) => {
+      this.allQuestions = res;
+    });
+  }
+
+  ngOnInit() {
+    this.getQuestions();
   }
 }

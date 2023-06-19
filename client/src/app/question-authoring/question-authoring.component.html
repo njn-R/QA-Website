@@ -10,7 +10,7 @@
     <div
       class="relative px-7 py-6 ring-1 ring-gray-900/5 rounded-xl leading-none flex items-top justify-start space-x-6"
     >
-      <div class="justify-center justify-items-center">
+      <div class="text-center">
         <div class="w-full max-w-sm">
           <button
             (click)="toggleModal()"
@@ -18,7 +18,53 @@
           >
             Add Question
           </button>
-          <h1 class="text-center mt-10 text-5xl font-bold">Questions</h1>
+          <h1 class="text-left mt-10 text-5xl font-bold">Questions</h1>
+
+          <!-- Display all questions from database -->
+
+          <div class="mx-auto w-[500px] max-w-5xl bg-white rounded-xl mt-8">
+            <ul class="flex flex-col" *ngFor="let question of allQuestions">
+              <li class="border-b-2 border-gray-100">
+                <div
+                  [ngClass]="{
+                    'py-5 px-4 flex justify-between border-l-4 border-transparent bg-transparent': true,
+                    'hover:border-blue-400 hover:bg-gray-200':
+                      question.category === 'React',
+                    'hover:border-green-500 hover:bg-gray-100':
+                      question.category === 'NodeJS'
+                  }"
+                >
+                  <div className="sm:pl-4 pr-8 flex sm:items-center">
+                    <p class="py-2 font-bold">Question {{ question.id }}</p>
+
+                    <div className="space-y-1">
+                      <p
+                        className="text-base text-gray-700 font-bold tracking-wide"
+                      >
+                        {{ question.question }}
+                      </p>
+
+                      <div class="mt-4">
+                        <span
+                          class="bg-indigo-500 text-white text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full"
+                        >
+                          {{ question.answerType }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-1 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                  >
+                    Edit
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- --------------------------------------- -->
         </div>
       </div>
     </div>
@@ -120,7 +166,10 @@
           <div *ngIf="selectedAnswerType != ''">
             <label
               class="block text-gray-700 text-sm font-bold mb-2"
-              *ngIf="selectedAnswerType !== 'Text'"
+              *ngIf="
+                selectedAnswerType !== 'Text' &&
+                selectedAnswerType !== 'True/False'
+              "
             >
               Write the options and mark the correct answer
             </label>
@@ -129,6 +178,12 @@
               *ngIf="selectedAnswerType === 'Text'"
             >
               Answer
+            </label>
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              *ngIf="selectedAnswerType === 'True/False'"
+            >
+              Mark the correct answer
             </label>
 
             <!-- Textbox -->
@@ -142,64 +197,45 @@
             </div>
 
             <!-- MCQ -->
-            <div *ngIf="selectedAnswerType === 'MCQ'" class="">
-              <input
-                id="answer1"
-                type="radio"
-                value=""
-                name="answer-radio"
-                class="mr-2"
-              />
-              <input
-                type="text"
-                class="border-2 w-96 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
-              />
-              <input
-                id="answer2"
-                type="radio"
-                value=""
-                name="answer-radio"
-                class="mr-2"
-              />
-              <input
-                type="text"
-                class="border-2 w-96 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
-              />
-              <input
-                id="answer3"
-                type="radio"
-                value=""
-                name="answer-radio"
-                class="mr-2"
-              />
-              <input
-                type="text"
-                class="border-2 w-96 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
-              />
-              <input
-                id="answer4"
-                type="radio"
-                value=""
-                name="answer-radio"
-                class="mr-2"
-              />
-              <input
-                type="text"
-                class="border-2 w-96 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
-              />
+            <div *ngIf="selectedAnswerType === 'MCQ'">
+              <div formArrayName="multipleAnswers">
+                <div
+                  *ngFor="
+                    let answerGroup of answersArray.controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                >
+                  <input
+                    type="radio"
+                    formControlName="radio"
+                    class="mr-2"
+                    [attr.name]="'answerMCQ' + i"
+                  />
+                  <input
+                    type="text"
+                    formControlName="text"
+                    class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                (click)="addAnswer()"
+                class="mt-2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Add Option
+              </button>
             </div>
 
             <!-- True/False -->
-            <div
-              *ngIf="selectedAnswerType === 'True/False'"
-            >
+            <div *ngIf="selectedAnswerType === 'True/False'">
               <input
                 id="answer-true"
                 type="radio"
                 value="true"
                 name="answer"
                 formControlName="answer"
-                class="mr-2"
               />
               <label class="text-gray-700 text-sm mb-2" for="answer-true">
                 True
@@ -218,49 +254,81 @@
             </div>
 
             <!-- Checkbox -->
-            <div *ngIf="selectedAnswerType === 'Checkbox'" class="lg:flex">
-              <input id="answer" type="checkbox" value="" name="answer-radio" />
-              <input
-                type="text"
-                class="border-2 w-[200px] border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
-              />
-              <input id="answer" type="checkbox" value="" name="answer-radio" />
-              <input
-                type="text"
-                class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
-              />
-              <input id="answer" type="checkbox" value="" name="answer-radio" />
-              <input
-                type="text"
-                class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
-              />
-              <input id="answer" type="checkbox" value="" name="answer-radio" />
-              <input
-                type="text"
-                class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
-              />
+            <div *ngIf="selectedAnswerType === 'Checkbox'">
+              <div>
+                <input
+                  id="answer"
+                  type="checkbox"
+                  value=""
+                  name="answer-radio"
+                  class="mr-2"
+                />
+                <input
+                  type="text"
+                  class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
+                />
+              </div>
+              <div>
+                <input
+                  id="answer"
+                  type="checkbox"
+                  value=""
+                  name="answer-radio"
+                  class="mr-2"
+                />
+                <input
+                  type="text"
+                  class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
+                />
+              </div>
+              <div>
+                <input
+                  id="answer"
+                  type="checkbox"
+                  value=""
+                  name="answer-radio"
+                  class="mr-2"
+                />
+                <input
+                  type="text"
+                  class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
+                />
+              </div>
+              <div>
+                <input
+                  id="answer"
+                  type="checkbox"
+                  value=""
+                  name="answer-radio"
+                  class="mr-2"
+                />
+                <input
+                  type="text"
+                  class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
+                />
+              </div>
             </div>
           </div>
+          <!--footer-->
+          <div
+            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+          >
+            <button
+              class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="submit"
+              (click)="onSubmit()"
+            >
+              Add
+            </button>
+            <button
+              class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              (click)="toggleModal()"
+            >
+              Close
+            </button>
+          </div>
         </form>
-      </div>
-      <!--footer-->
-      <div
-        class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
-      >
-        <button
-          class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="submit"
-          (click)="onSubmit()"
-        >
-          Add
-        </button>
-        <button
-          class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          (click)="toggleModal()"
-        >
-          Close
-        </button>
       </div>
     </div>
   </div>

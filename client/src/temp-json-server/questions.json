@@ -2,17 +2,17 @@
   "questions": [
     {
       "id": 1,
-      "category": "",
-      "question": "",
-      "answerType": "True/False",
-      "answer": "true"
+      "category": "React",
+      "question": "What is a virtual DOM",
+      "answerType": "Text",
+      "answer": "Virtual DOM is a copy of the real DOM"
     },
     {
       "id": 2,
-      "category": "",
-      "question": "",
+      "category": "NodeJS",
+      "question": "NodeJS uses eventloop",
       "answerType": "True/False",
-      "answer": "false"
+      "answer": "true"
     }
   ]
 }
