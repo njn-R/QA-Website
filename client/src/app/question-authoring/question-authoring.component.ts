@@ -31,7 +31,7 @@ export class QuestionAuthoringComponent {
     answer: this.formBuilder.control(''),
     multipleAnswers: this.formBuilder.array([
       this.formBuilder.group({
-        radio: [false],
+        radio: ["false"],
         text: [''],
       }),
     ]),
@@ -43,7 +43,7 @@ export class QuestionAuthoringComponent {
   addAnswer() {
     this.answersArray.push(
       this.formBuilder.group({
-        radio: [false],
+        radio: ["false"],
         text: [''],
       })
     );
@@ -57,6 +57,9 @@ export class QuestionAuthoringComponent {
     this.service.postQuestion(this.questionForm.value).subscribe((res) => {
       this.toastr.success('Question added successfully');
     });
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
     this.toggleModal();
   }
 

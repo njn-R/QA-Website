@@ -3,14 +3,6 @@ import { AuthService } from '../service/auth.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
-// interface User {
-//   id: string;
-//   name: string;
-//   email: string;
-//   password: string;
-//   role: string;
-// }
-
 @Component({
   selector: 'app-admin-panel',
   templateUrl: './admin-panel.component.html',
@@ -39,9 +31,8 @@ export class AdminPanelComponent {
   });
 
   userList: any;
-  roleList = ['Candidate','Interviewer', 'Question Author'];
+  roleList = ['Candidate', 'Interviewer', 'Question Author'];
   showModal = false;
-  // userRole!: string;
 
   editUser(
     id: string,
@@ -57,9 +48,6 @@ export class AdminPanelComponent {
       password: password,
       role: role,
     });
-    // this.roleList = this.userList.map((user: User) => user.role);
-    // console.log(this.roleList);
-    
     this.toggleModal();
   }
 
@@ -85,6 +73,16 @@ export class AdminPanelComponent {
         });
     } else {
       this.toastr.error('Please fill all the fields');
+    }
+  }
+
+  onDelete() {
+    if (this.formUpdate.valid) {
+      this.service.deleteUser(this.formUpdate.value.id).subscribe((res) => {
+        this.toastr.success('User deleted successfully');
+      });
+    } else {
+      this.toastr.error('Error');
     }
   }
 }

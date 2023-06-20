@@ -9,6 +9,7 @@ import { CoursesComponent } from './courses/courses.component';
 import { InterviewPrepComponent } from './interview-prep/interview-prep.component';
 import { MockInterviewComponent } from './interview-prep/mock-interview/mock-interview.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'prep', component: InterviewPrepComponent },
   { path: 'mock', component: MockInterviewComponent },
   { path: 'reset-password', component: ForgotPasswordComponent },
+  { path: 'cart', component: CartComponent },
 ];
 
 @NgModule({

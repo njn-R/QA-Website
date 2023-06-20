@@ -1,14 +1,9 @@
 <div
-  class="min-h-screen bg-gray-50 flex justify-center relative overflow-hidden sm:py-12"
+  class="min-h-screen bg-gray-100 flex justify-center relative overflow-hidden sm:py-12"
 >
   <div class="max-w-7xl mx-auto">
-    <!-- New Div -->
     <div
-      class="absolute -inset-1 bg-gradient-to-r from-green-600 to-skyblue-600 rounded-lg blur opacity-25"
-    ></div>
-
-    <div
-      class="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6"
+      class="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6 shadow-md"
     >
       <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -79,9 +74,7 @@
                             <h3 class="text-3xl font-semibold">Edit</h3>
                             <button
                               class="p-1 ml-auto bg-transparent border-0 text-black opacity-50 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                              (click)="
-                                toggleModal()
-                              "
+                              (click)="toggleModal()"
                             >
                               <span
                                 class="bg-transparent text-black opacity-50 h-6 w-6 text-2xl block outline-none focus:outline-none"
@@ -161,10 +154,25 @@
                                 formControlName="role"
                                 id="roles"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                              > 
-                              <option *ngFor="let role of roleList" [value]="role">{{role}}</option>
+                              >
+                                <option
+                                  *ngFor="let role of roleList"
+                                  [value]="role"
+                                >
+                                  {{ role }}
+                                </option>
                               </select>
+                                <div class="flex justify-center items-center mt-4">
+                              <button
+                                (click)="onDelete()"
+                                type="submit"
+                                class="w-full bg-red-500 text-white active:bg-gray-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+                              >
+                                Delete User
+                              </button>
+                            </div>
                             </form>
+                          
                           </div>
                           <!--footer-->
                           <div
@@ -173,9 +181,7 @@
                             <button
                               class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                               type="submit"
-                              (click)="
-                               onSubmit()
-                              "
+                              (click)="onSubmit()"
                             >
                               Save Changes
                             </button>

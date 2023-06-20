@@ -20,6 +20,7 @@ import { InterviewPrepComponent } from './interview-prep/interview-prep.componen
 import { MockInterviewComponent } from './interview-prep/mock-interview/mock-interview.component';
 import { FooterComponent } from './footer/footer.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -37,6 +38,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MockInterviewComponent,
     FooterComponent,
     ForgotPasswordComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

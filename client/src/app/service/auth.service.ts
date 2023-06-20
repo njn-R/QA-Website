@@ -6,9 +6,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  userUrl = 'http://localhost:3001/user';
   courseUrl = 'http://localhost:3000/courses';
+  userUrl = 'http://localhost:3001/user';
   questionUrl = 'http://localhost:3002/questions';
+  cartUrl = 'http://localhost:3003/cart';
 
   constructor(private http: HttpClient) {}
 
@@ -33,6 +34,10 @@ export class AuthService {
     return this.http.put(this.userUrl + '/' + id, postData);
   }
 
+  deleteUser(id: any) {
+    return this.http.delete(this.userUrl + '/' + id)
+  }
+
   // Course API
   getAllCourses() {
     return this.http.get(this.courseUrl);
@@ -45,5 +50,18 @@ export class AuthService {
 
   getAllQuestions() {
     return this.http.get(this.questionUrl);
+  }
+
+  //Cart API
+  postToCart(postData: any) {
+    return this.http.post(this.cartUrl, postData);
+  }
+
+  getAllCartItems() {
+    return this.http.get(this.cartUrl);
+  }
+
+  deleteCartItem(id: any) {
+    return this.http.delete(this.cartUrl + '/' + id);
   }
 }
