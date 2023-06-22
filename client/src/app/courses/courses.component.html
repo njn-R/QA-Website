@@ -1,5 +1,5 @@
-<!-- Hero Section -->
-<section id="courses">
+
+<section id="courses" class="mb-16 min-h-screen">
   <!-- Flex Container -->
   <div
     class="container flex flex-col-reverse md:flex-row items-center px-16 mx-auto mt-10 space-y-0 md:space-y-0"
@@ -16,10 +16,10 @@
 
   <!-- Card -->
 
-  <div class="flex flex-col md:flex-row flex-wrap ml-16">
+  <div class="flex flex-col md:flex-row flex-wrap ml-16 ">
     <div *ngFor="let course of courseData">
       <div
-        class="w-[350px] h-[380px] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ml-8 mb-16"
+        class="w-[350px] h-[380px] shadow-lg bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 ml-8 mb-16 overflow-hidden transform transition-transform duration-300 hover:scale-105"
       >
         <a href="#">
           <img
@@ -31,7 +31,7 @@
         <div class="px-5 pb-5">
           <a href="#">
             <h5
-              class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"
+              class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white h-[50px]"
             >
               {{ course.title }}
             </h5>
@@ -62,10 +62,10 @@
             <span class="text-3xl font-bold text-gray-900 dark:text-white"
               >${{ course.price }}</span
             >
-            <a
-              href="#"
+            <button
+              (click)="onSubmit(course)"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >Add to cart</a
+              >Add to cart</button
             >
           </div>
         </div>

@@ -6,6 +6,10 @@ import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { QuestionAuthoringComponent } from './question-authoring/question-authoring.component';
 import { CoursesComponent } from './courses/courses.component';
+import { InterviewPrepComponent } from './interview-prep/interview-prep.component';
+import { MockInterviewComponent } from './interview-prep/mock-interview/mock-interview.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +18,10 @@ const routes: Routes = [
   { path: 'admin', component: AdminPanelComponent },
   { path: 'questions', component: QuestionAuthoringComponent },
   { path: 'courses', component: CoursesComponent },
+  { path: 'prep', component: InterviewPrepComponent },
+  { path: 'mock', component: MockInterviewComponent },
+  { path: 'reset-password', component: ForgotPasswordComponent },
+  { path: 'cart', component: CartComponent },
 ];
 
 @NgModule({

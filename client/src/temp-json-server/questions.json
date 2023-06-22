@@ -1,0 +1,38 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "React",
+      "question": "What is a virtual DOM",
+      "answerType": "Text",
+      "answer": "Virtual DOM is a copy of the real DOM"
+    },
+    {
+      "id": 2,
+      "category": "NodeJS",
+      "question": "NodeJS uses eventloop",
+      "answerType": "True/False",
+      "answer": "true"
+    },
+    {
+      "id": 3,
+      "category": "React",
+      "question": "Which lifecycle method is used to perform cleanup and unsubscribe when a component is unmounted in React?",
+      "answerType": "MCQ",
+      "answer": "",
+      "multipleAnswers": [
+        {
+          "text": "ComponentWillUnmount"
+        },
+        {
+          "radio": false,
+          "text": "ShouldComponentUpdate"
+        },
+        {
+          "radio": false,
+          "text": "Render"
+        }
+      ]
+    }
+  ]
+}

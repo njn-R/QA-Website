@@ -16,6 +16,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuestionAuthoringComponent } from './question-authoring/question-authoring.component';
 import { FormsModule } from '@angular/forms';
 import { CoursesComponent } from './courses/courses.component';
+import { InterviewPrepComponent } from './interview-prep/interview-prep.component';
+import { MockInterviewComponent } from './interview-prep/mock-interview/mock-interview.component';
+import { FooterComponent } from './footer/footer.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -29,6 +34,11 @@ import { CoursesComponent } from './courses/courses.component';
     NavBarComponent,
     QuestionAuthoringComponent,
     CoursesComponent,
+    InterviewPrepComponent,
+    MockInterviewComponent,
+    FooterComponent,
+    ForgotPasswordComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

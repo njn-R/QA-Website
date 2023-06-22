@@ -1,32 +1,65 @@
 <div
-  class="min-h-screen bg-gray-50 flex justify-center relative overflow-hidden sm:py-12"
+  class="min-h-screen bg-gray-100 flex justify-center relative overflow-hidden sm:py-12"
 >
   <div class="max-w-7xl mx-auto">
-    <!-- New Div -->
     <div
-      class="absolute -inset-1 bg-gradient-to-r from-green-600 to-skyblue-600 rounded-lg blur opacity-25"
-    ></div>
-
-    <div
-      class="relative px-7 py-6 ring-1 ring-gray-900/5 rounded-xl leading-none flex items-top justify-start space-x-6"
+      class="relative px-7 py-6 rounded-xl leading-none flex items-top justify-start space-x-6"
     >
-      <div class="flex justify-center justify-items-center">
+      <div class="text-center">
         <div class="w-full max-w-sm">
-          <div>
-            <button
-              (click)="toggleModal()"
-              class="bg-emerald-500 hover:bg-emerald-400 text-3xl text-white font-bold px-2 py-4 rounded-xl focus:outline-none focus:shadow-outline ml-2"
-            >
-              Add Question
-            </button>
+          <button
+            (click)="toggleModal()"
+            class="ml-8 bg-emerald-500 hover:bg-emerald-800 text-xl text-white font-bold px-4 py-4 rounded-xl focus:outline-none focus:shadow-outline"
+          >
+            Add Question
+          </button>
+          <h1 class="text-center mt-10 text-5xl font-bold">Questions</h1>
+
+          <!-- Display all questions from database -->
+
+          <div class="bg-white rounded-xl mt-8 shadow-md">
+            <ul class="flex flex-col" *ngFor="let question of allQuestions">
+              <li class="border-b-2 border-gray-100">
+                <div
+                  [ngClass]="{
+                    'py-5 px-4 justify-between border-l-4 border-transparent bg-transparent': true,
+                    'hover:border-blue-400 hover:bg-gray-200':
+                      question.category === 'React',
+                    'hover:border-green-500 hover:bg-gray-100':
+                      question.category === 'NodeJS'
+                  }"
+                >
+                  <div className="sm:pl-4 pr-8 flex sm:items-center">
+                    <p class="py-2 font-bold">Question {{ question.id }}</p>
+
+                    <div className="space-y-1">
+                      <p
+                        className="text-base text-gray-700 font-bold tracking-wide"
+                      >
+                        {{ question.question }}
+                      </p>
+
+                      <div class="mt-4">
+                        <span
+                          class="bg-indigo-500 text-white text-sm font-medium mr-2 px-3 py-1 rounded-full"
+                        >
+                          {{ question.answerType }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <button
+                    type="button"
+                    class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-1 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900"
+                  >
+                    Edit
+                  </button> -->
+                </div>
+              </li>
+            </ul>
           </div>
-          <div>
-            <h3
-              class="flex justify-center justify-items-center mt-10 text-3xl text-bold"
-            >
-              Questions
-            </h3>
-          </div>
+          <!-- --------------------------------------- -->
         </div>
       </div>
     </div>
@@ -61,25 +94,28 @@
       </div>
       <!--body-->
       <div class="relative p-6 flex-auto">
-        <label for="category" class="block mb-2 text-sm font-bold text-gray-900"
-          >Select an option</label
+        <form
+          class="rounded-xl mt-2"
+          [formGroup]="questionForm"
+          (ngSubmit)="onSubmit()"
         >
-        <select
-          id="category"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-emerald-500 block w-full p-2.5"
-        >
-          <option selected>Category</option>
-          <option value="Candidate">React</option>
-          <option value="Interviewer">Angular</option>
-          <option value="Question Author">NodeJS</option>
-          <option value="Question Author">Javascript</option>
-          <option value="Question Author">MongoDB</option>
-        </select>
-
-        <form class="rounded-xl mt-10" [formGroup]="questionForm">
-          <div class="mb-10">
+          <div>
             <label
-              class="block text-gray-700 text-sm font-bold mb-2"
+              for="category"
+              class="block mb-2 text-sm font-bold text-gray-900"
+              >Category</label
+            >
+            <select
+              formControlName="category"
+              id="category"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option *ngFor="let category of categories" [value]="category">
+                {{ category }}
+              </option>
+            </select>
+            <label
+              class="block text-gray-700 text-sm font-bold mt-4 mb-2"
               for="question"
             >
               Question
@@ -92,70 +128,61 @@
               placeholder="What is a virtual DOM?"
             />
           </div>
-          <div class="mb-10">
+          <div class="mb-4">
             <p
-              class="block text-gray-700 text-sm font-bold mb-2"
+              class="block text-gray-700 text-sm font-bold mt-4 mb-2"
               for="answerType"
             >
               Answer Type
             </p>
-            <div class="lg:flex">
-              <div
-                class="flex items-center pl-4 border border-gray-200 rounded mr-10 w-60 hover:border-emerald-400"
-              >
-                <input
-                  checked
-                  id="textAnswer"
-                  type="radio"
-                  value=""
-                  name="answerType-radio"
-                  [(ngModel)]="selectedAnswerType"
-                />
-                <label
-                  for="textAnswer"
-                  class="w-full py-4 ml-2 text-sm font-medium text-gray-900"
-                  >Text Answer</label
+            <div class="flex flex-wrap">
+              <div *ngFor="let answerType of answerTypeArray">
+                <div
+                  class="flex items-center pl-4 border border-gray-200 rounded mr-10 w-60"
                 >
-              </div>
-              <div
-                class="flex items-center pl-4 border border-gray-200 rounded mr-10 w-60 hover:border-emerald-400"
-              >
-                <input id="mcq" type="radio" value="" name="answerType-radio" [(ngModel)]="selectedAnswerType" />
-                <label
-                  for="mcq"
-                  class="w-full py-4 ml-2 text-sm font-medium text-gray-900"
-                  >MCQ</label
-                >
-              </div>
-              <div
-                class="flex items-center pl-4 border border-gray-200 rounded mr-10 w-60 hover:border-emerald-400"
-              >
-                <input
-                  id="checkbox"
-                  type="radio"
-                  value=""
-                  name="answerType-radio"
-                  [(ngModel)]="selectedAnswerType"
-                />
-                <label
-                  for="checkbox"
-                  class="w-full py-4 ml-2 text-sm font-medium text-gray-900"
-                  >Checkbox</label
-                >
+                  <input
+                    formControlName="answerType"
+                    [id]="'textAnswer' + answerType"
+                    type="radio"
+                    name="answerType"
+                    [value]="answerType"
+                    [(ngModel)]="selectedAnswerType"
+                  />
+                  <label
+                    [for]="'textAnswer' + answerType"
+                    class="w-full py-4 ml-2 text-sm text-gray-900"
+                    >{{ answerType }}</label
+                  >
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="mb-4">
+          <div *ngIf="selectedAnswerType != ''">
             <label
               class="block text-gray-700 text-sm font-bold mb-2"
-              for="answer"
+              *ngIf="
+                selectedAnswerType !== 'Text' &&
+                selectedAnswerType !== 'True/False'
+              "
+            >
+              Write the options and mark the correct answer
+            </label>
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              *ngIf="selectedAnswerType === 'Text'"
             >
               Answer
             </label>
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              *ngIf="selectedAnswerType === 'True/False'"
+            >
+              Mark the correct answer
+            </label>
 
             <!-- Textbox -->
-            <div *ngIf="selectedAnswerType === 'textbox'" class="lg:flex">
+            <div *ngIf="selectedAnswerType === 'Text'" class="lg:flex">
               <input
                 formControlName="answer"
                 class="border-2 border-gray-200 rounded w-full h-[100px] py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
@@ -165,63 +192,114 @@
             </div>
 
             <!-- MCQ -->
-            <div *ngIf="selectedAnswerType === 'mcq'" class="lg:flex">
-              <input id="answer" type="radio" value="" name="answer-radio" />
-              <input
-                type="text"
-                class="border-2 w-[200px] border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
-              />
-              <input id="answer" type="radio" value="" name="answer-radio" />
-              <input
-                type="text"
-                class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
-              />
-              <input id="answer" type="radio" value="" name="answer-radio" />
-              <input
-                type="text"
-                class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
-              />
+            <div *ngIf="selectedAnswerType === 'MCQ'">
+              <div formArrayName="multipleAnswers">
+                <div
+                  *ngFor="
+                    let answerGroup of answersArray.controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                >
+                  <input
+                    type="radio"
+                    formControlName="radio"
+                    name="mcq-radio"
+                    value="true"
+                    class="mr-2"
+                  />
+                  <input
+                    type="text"
+                    formControlName="text"
+                    class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                (click)="addAnswer()"
+                class="mt-2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Add Option
+              </button>
             </div>
 
-            <!-- Checkbox -->
-            <div *ngIf="selectedAnswerType === 'checkbox'" class="lg:flex">
-              <input id="answer" type="checkbox" value="" name="answer-radio" />
+            <!-- True/False -->
+            <div *ngIf="selectedAnswerType === 'True/False'">
               <input
-                type="text"
-                class="border-2 w-[200px] border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
+                id="answer-true"
+                type="radio"
+                value="true"
+                name="answer"
+                formControlName="answer"
               />
-              <input id="answer" type="checkbox" value="" name="answer-radio" />
+              <label class="text-gray-700 text-sm mb-2" for="answer-true">
+                True
+              </label>
               <input
-                type="text"
-                class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
+                id="answer-false"
+                type="radio"
+                value="false"
+                name="answer"
+                class="ml-8"
+                formControlName="answer"
               />
-              <input id="answer" type="checkbox" value="" name="answer-radio" />
-              <input
-                type="text"
-                class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500"
-              />
+              <label class="text-gray-700 text-sm mb-2" for="answer-false">
+                False
+              </label>
+            </div>
+
+            <div *ngIf="selectedAnswerType === 'Checkbox'">
+              <div formArrayName="multipleAnswers">
+                <div
+                  *ngFor="
+                    let answerGroup of answersArray.controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                >
+                  <input
+                    type="checkbox"
+                    formControlName="radio"
+                    name="mcq-radio"
+                    class="mr-2"
+                  />
+                  <input
+                    type="text"
+                    formControlName="text"
+                    class="border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-emerald-500 mb-2"
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                (click)="addAnswer()"
+                class="mt-2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Add Option
+              </button>
             </div>
           </div>
+          <!--footer-->
+          <div
+            class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
+          >
+            <button
+              class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="submit"
+              (click)="onSubmit()"
+            >
+              Add
+            </button>
+            <button
+              class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              (click)="toggleModal()"
+            >
+              Close
+            </button>
+          </div>
         </form>
-      </div>
-      <!--footer-->
-      <div
-        class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b"
-      >
-        <button
-          class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          (click)="toggleModal()"
-        >
-          Add
-        </button>
-        <button
-          class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-          (click)="toggleModal()"
-        >
-          Close
-        </button>
       </div>
     </div>
   </div>
