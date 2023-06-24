@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
   courseUrl = 'http://localhost:3000/courses';
-  userUrl = 'http://localhost:3001/user';
+  userUrl = ' http://localhost:5000/api/users/register';
   questionUrl = 'http://localhost:3002/questions';
   cartUrl = 'http://localhost:3003/cart';
 
@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   deleteUser(id: any) {
-    return this.http.delete(this.userUrl + '/' + id)
+    return this.http.delete(this.userUrl + '/' + id);
   }
 
   // Course API
