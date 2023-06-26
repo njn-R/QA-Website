@@ -1,16 +1,6 @@
 {
   "cart": [
     {
-      "courseID": 5,
-      "title": "Advanced CSS and Sass",
-      "price": "299",
-      "rating": 3.9,
-      "description": "An advanced course on CSS and Sass with real-world projects and challenges.",
-      "level": "Intermediate to Advanced",
-      "image": "assets/images/cssSass.jpg",
-      "id": 4
-    },
-    {
       "courseID": 1,
       "title": "The Web Developer Bootcamp",
       "price": "599",
@@ -18,7 +8,7 @@
       "description": "A comprehensive course covering HTML, CSS, JavaScript, Node.js, and more.",
       "level": "Beginner to Intermediate",
       "image": "assets/images/webDev-Bootcamp.png",
-      "id": 5
+      "id": 6
     }
   ]
 }

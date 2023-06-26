@@ -5,7 +5,7 @@
       "email": "test@example.com",
       "name": "John Doe",
       "password": "password",
-      "role": "Candidate"
+      "role": "Interviewer"
     },
     {
       "id": 2,

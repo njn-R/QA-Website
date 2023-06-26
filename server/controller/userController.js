@@ -2,9 +2,13 @@ import asyncHandler from 'express-async-handler'
 import generateToken from '../utils/generateToken.js'
 import User from '../models/userModel.js'
 
+// @desc Authenticate user login
+// route POST /api/users/auth
+// @access Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
   const user = await User.findOne({ email })
+
   if (user && (await user.matchPassword(password))) {
     generateToken(res, user._id)
     res.status(201).json({
@@ -13,14 +17,18 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
     })
   } else {
-    res.status(400)
-    throw new Error('invalid email or password')
+    res.status(401)
+    throw new Error('Invalid email or password')
   }
 })
 
+// @desc Register
+// route POST /api/users/register
+// @access Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, role } = req.body
   const userExists = await User.findOne({ email })
+
   if (userExists) {
     res.status(400)
     throw new Error('User already exists')
@@ -31,6 +39,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
     role,
   })
+  
   if (user) {
     generateToken(res, user._id)
     res.status(201).json({
@@ -41,10 +50,13 @@ const registerUser = asyncHandler(async (req, res) => {
     })
   } else {
     res.status(400)
-    throw new Error('invalid user data')
+    throw new Error('Invalid user data')
   }
 })
 
+// @desc User logout
+// route POST /api/users/logout
+// @access Private
 const logoutUser = asyncHandler(async (req, res) => {
   res.cookie('jwt', '', {
     httpOnly: true,

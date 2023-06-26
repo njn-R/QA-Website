@@ -10,7 +10,7 @@ import { AuthService } from '../service/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  userData:any = ''
+  userData: any = '';
   constructor(
     private formBuilder: FormBuilder,
     private toastr: ToastrService,
@@ -28,19 +28,33 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.formLogin.valid) {
-      this.service.getUserbyEmail(this.formLogin.value.email).subscribe(res => {
-        this.userData = res
+      // this.service.getUserbyEmail(this.formLogin.value.email).subscribe(res => {
+      //   this.userData = res
 
-        if (this.userData[0].password === this.formLogin.value.password) {
-          sessionStorage.setItem('email', this.userData[0].email);
-          sessionStorage.setItem('role', this.userData[0].role);
+      //   if (this.userData[0].password === this.formLogin.value.password) {
+      //     sessionStorage.setItem('email', this.userData[0].email);
+      //     sessionStorage.setItem('role', this.userData[0].role);
+      //     this.toastr.success('Login Successful');
+      //     this.router.navigate(['']);
+      //   } else {
+      //     this.toastr.error('Invalid credentials');
+      //   }
+
+      //  })
+
+      this.service.authUser(this.formLogin.value).subscribe((res) => {
+        this.userData = res;
+        console.log(this.userData);
+        
+        if (this.userData.email === this.formLogin.value.email) {
+          // sessionStorage.setItem('email', this.userData[0].email);
+          // sessionStorage.setItem('role', this.userData[0].role);
           this.toastr.success('Login Successful');
           this.router.navigate(['']);
         } else {
           this.toastr.error('Invalid credentials');
         }
-        
-       })
+      });
     }
   }
 }
